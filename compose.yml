@@ -1,0 +1,19 @@
+services:
+  better-marketplace:
+    build: .
+    env_file: .env
+    environment:
+      MARKETPLACE_DATA_DIR: /data
+      MARKETPLACE_HOST: 0.0.0.0
+    ports:
+      - "127.0.0.1:8768:8768"
+    volumes:
+      - marketplace-data:/data
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+volumes:
+  marketplace-data:
